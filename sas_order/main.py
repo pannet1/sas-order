@@ -1,5 +1,6 @@
 from omspy_brokers.sasonline import Sasonline
 from toolkit.fileutils import Fileutils
+from toolkit.utilities import Utilities
 from toolkit.logger import Logger
 
 sl_percentage = 3.0
@@ -22,14 +23,14 @@ def read_local_json(details):
         return json.load(json_file)
 
 
-if __name__ == "main":
+if __name__ == "__main__":
     cred = Fileutils().get_lst_fm_yml(fpath + "sas.yaml")
     try:
         sas = Sasonline(cred['login_id'], cred['password'], cred['totp'])
         if sas.authenticate():
             print("\n successfully authenticated")
-    except Exception as e:
-        print(e)
+    except Exception:
+        print("exception .. exiting")
         SystemExit()
     # Post successful authentication
     while True:
@@ -37,11 +38,9 @@ if __name__ == "main":
         print(resp)
         # get order numbers for those order for which
         # the order status is complete
-        for open_order, open_order_details in open_order_sl_order_combo.items():
-            if not open_order_details["sl_order"]:
-                open_order_details["sl_order"] = place_sl_order(
-                    open_order_details["market_price???"])
+        pass
         # order_id | related_order_id | type    ! qty
         # 001      | 002              | entry   | 50
         # 002      | 001              | exit    | -50
-        modify_order("some_params")
+        # modify_order("some_params")
+        Utilities().slp_til_nxt_sec()
