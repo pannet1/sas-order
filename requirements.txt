@@ -1,9 +1,11 @@
-wheel
-setuptools<58.0.0
-protlib<1.5.0
+-r ./requirements-dev.txt
+protlib
 websocket_client
 requests
 pandas
+pyyaml
+pydantic
+pendulum
 git+https://github.com/algo2t/alphatrade.git
 git+https://github.com/pannet1/omspy
 git+https://github.com/pannet1/omspy-brokers
